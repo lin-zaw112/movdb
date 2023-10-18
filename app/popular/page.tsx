@@ -19,7 +19,7 @@ function Popular(): React.JSX.Element {
     setPage((prev) => prev + 1);
   }
   const fetchVideos = useCallback(async (page: number): Promise<void> => {
-    const res = await fetch(`/api/movies/topRated?page=${page}`);
+    const res = await fetch(`/api/movies/popular?page=${page}`);
 
     const moviesObj: moviesObj = await res.json();
 
