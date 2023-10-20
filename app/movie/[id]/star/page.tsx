@@ -1,5 +1,4 @@
-import React, { Suspense } from "react";
-import Loading from "@/app/movie/[id]/Loading";
+import React from "react";
 import getEnvVar from "@/utils/getEnvVer";
 import CardXs from "@/Components/utils/CardXs";
 
@@ -35,8 +34,8 @@ export default async function StarList(
 ): Promise<React.JSX.Element> {
   const stars = await fetchStars(props.params.id);
   return (
-    <Suspense fallback={<Loading />}>
-      <div className="flex flex-row space-x-4 overflow-hidden overflow-x-scroll bg-neutral-100 px-16 dark:bg-neutral-900">
+    <div className="overflow-hidden overflow-x-scroll">
+      <div className="flex h-72 w-fit flex-row items-center space-x-3 bg-neutral-100 dark:bg-neutral-900">
         {stars.slice(0, 7).map((star) => (
           <CardXs
             image={star.profile_path}
@@ -47,6 +46,6 @@ export default async function StarList(
           />
         ))}
       </div>
-    </Suspense>
+    </div>
   );
 }

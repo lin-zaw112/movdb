@@ -52,13 +52,7 @@ body {
 }
 
 @layer components {
-    .Card {
-     @apply m-2 relative h-72 w-44 cursor-pointer overflow-hidden rounded-lg shadow-xl dark:bg-neutral-950 dark:hover:bg-neutral-900 
-    }
-    .poster{
-    @apply relative m-5 h-80 w-52 flex-none overflow-hidden 
-    }
-    .posterBadge{
+    .badge{
       @apply absolute -left-7 top-5 z-10 block -rotate-45 bg-neutral-50 px-6 text-sm text-neutral-950 shadow-lg shadow-neutral-950
     }
     

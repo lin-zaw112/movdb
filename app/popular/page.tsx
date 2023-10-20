@@ -2,22 +2,29 @@
 import React, { useCallback, useState, useEffect, Fragment } from "react";
 import getImageUrl from "@/utils/getImageUrl";
 import Card from "@/Components/utils/Card";
-import Error from "./error";
 import CardSkelaton from "@/Components/utils/Skelaton/Card";
 
 const initialData: React.JSX.Element[] = [];
 for (let i = 0; i <= 20; i++) {
-  initialData.push(<CardSkelaton />);
+  initialData.push(<CardSkelaton key={i} />);
 }
-function Popular(): React.JSX.Element {
+let initial = true;
+export default function Popular(): React.JSX.Element {
   const [content, setContent] = useState<React.JSX.Element>();
   const [status, setStatus] = useState<"success" | "failed" | "init">("init");
   const [movies, setMovies] = useState<moviesObj>();
   const [Currentpage, setPage] = useState<number>(1);
 
-  function newLimit(): void {
-    setPage((prev) => prev + 1);
-  }
+  const newLimit = useCallback((): void => {
+    setPage((prev) =>
+      movies?.page != null
+        ? prev === movies.page
+          ? prev + 1
+          : prev
+        : prev + 1,
+    );
+  }, [movies]);
+
   const fetchVideos = useCallback(async (page: number): Promise<void> => {
     const res = await fetch(`/api/movies/popular?page=${page}`);
 
@@ -41,6 +48,10 @@ function Popular(): React.JSX.Element {
   }, []);
 
   useEffect(() => {
+    if (initial) {
+      initial = false;
+      return;
+    }
     void fetchVideos(Currentpage);
   }, [Currentpage, fetchVideos]);
 
@@ -74,14 +85,10 @@ function Popular(): React.JSX.Element {
           />
         ));
         setContent(<Fragment>{items}</Fragment>);
-      } else {
-        setContent(<Error />);
       }
     }
-  }, [movies, status]);
+  }, [movies, status, newLimit]);
   return (
     <div className={`m-4 flex flex-wrap justify-around gap-2`}>{content}</div>
   );
 }
-
-export default Popular;

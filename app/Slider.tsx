@@ -1,8 +1,8 @@
 "use client";
 import getImageUrl from "@/utils/getImageUrl";
 import React from "react";
-import Ticker from "../Ticker";
-import Card from "../utils/Card";
+import Ticker from "../Components/Ticker";
+import Card from "../Components/utils/Card";
 
 interface Props {
   items: movie[];

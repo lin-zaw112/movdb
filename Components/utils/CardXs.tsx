@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React from "react";
 import Image from "./Image";
 interface props {
   image: string;
@@ -12,23 +12,25 @@ export default function CardXs({
   character,
 }: props): React.JSX.Element {
   return (
-    <div className=" group m-2 flex h-52 w-fit flex-row rounded-lg transition-all duration-700  hover:bg-neutral-200 dark:hover:bg-neutral-950 ">
-      <Suspense
-        fallback={<div className="h-full animate-pulse bg-neutral-500 " />}
-      >
-        <Image
-          className="z-10 h-full w-32"
-          src={image}
-          quality="original"
-          alt={name}
-        />
-      </Suspense>
-      <h2 className="relative -top-1/3  h-full w-0 -translate-x-32 translate-y-1/2 text-lg leading-relaxed opacity-0 transition duration-500 group-hover:w-2/4 group-hover:-translate-x-0 group-hover:opacity-100">
-        {name}
-        <span className="flow-root font-semibold text-white">
-          As a {character}
-        </span>
-      </h2>
+    <div className="group relative h-64 w-60 ">
+      <div className="absolute left-1/2 top-1/2 h-64 w-56 -translate-x-1/2 -translate-y-1/2 cursor-pointer overflow-hidden rounded-lg bg-neutral-800 shadow-md transition-all duration-500">
+        <div className="absolute left-0 top-0 z-20 h-full w-full duration-500 group-hover:-translate-y-20 group-hover:transition-all group-hover:duration-700">
+          <Image
+            className="h-full w-full group-hover:opacity-40 group-hover:duration-500"
+            src={image}
+            quality="original"
+            alt={name}
+          />
+        </div>
+        <div className="absolute bottom-0 left-0 z-10 h-20 w-full p-2 text-lg leading-relaxed">
+          <h2 className="mx-8 whitespace-nowrap text-center">
+            {name}
+            <span className="flow-root text-base font-light text-neutral-700 dark:text-neutral-300">
+              As a {character}
+            </span>
+          </h2>
+        </div>
+      </div>
     </div>
   );
 }

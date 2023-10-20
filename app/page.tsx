@@ -1,7 +1,7 @@
 import React, { type ReactElement, Suspense } from "react";
 
 import Loading from "@/app/Loading";
-import Slider from "@/Components/template/Slider";
+import Slider from "@/app/Slider";
 import Link from "next/link";
 import getEnvVar from "@/utils/getEnvVer";
 

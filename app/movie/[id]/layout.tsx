@@ -1,9 +1,10 @@
-import React, { Fragment, Suspense } from "react";
-import Loading from "@/app/Loading";
+import React, { Fragment } from "react";
 import MovieNavagation from "./MovieNavagation";
 import getEnvVar from "@/utils/getEnvVer";
+import Image from "@/Components/utils/Image";
 
-import CardXl from "@/Components/utils/CardXl";
+import Details from "@/app/movie/[id]/Details";
+import Gallery from "@/app/movie/[id]/Gallery";
 
 const API_URL = getEnvVar("NEXT_PUBLIC_API_URL")?.replace(
   "{API_VERSION}",
@@ -15,6 +16,10 @@ const options = {
     accept: "application/json",
     Authorization: `Bearer ${getEnvVar("API_ACCESS_KEY")}`,
   },
+};
+const BadgeVariants: Record<string, string> = {
+  Released: 'before:content-["Released"]',
+  "In Production": 'before:content-["Production"]',
 };
 
 async function getMovie(id: string): Promise<movie | undefined> {
@@ -34,9 +39,32 @@ async function layout({
   return (
     <Fragment>
       <title>{movie?.title}</title>
-      <Suspense fallback={<Loading />}>
-        {movie !== undefined && <CardXl movie={movie} />}
-      </Suspense>
+      {movie !== undefined && (
+        <div className=" flex p-6 pb-0">
+          <Image
+            alt={movie.title}
+            src={
+              movie.poster_path ??
+              movie.belongs_to_collection?.poster_path ??
+              movie.backdrop_path ??
+              movie.belongs_to_collection?.backdrop_path ??
+              ""
+            }
+            quality="original"
+            className={`before:badge relative m-5 h-80 w-52 flex-none overflow-hidden hover:before:hidden ${
+              BadgeVariants[movie.status]
+            }`}
+          />
+          <Details
+            title={movie.original_title}
+            genres={movie.genres}
+            releaseDate={movie.release_date}
+            runTime={movie.runtime}
+            description={movie.overview}
+          />
+          <Gallery id={movie.id} quote={movie.tagline} title={movie.title} />
+        </div>
+      )}
       <MovieNavagation id={params.id} />
       {children}
     </Fragment>

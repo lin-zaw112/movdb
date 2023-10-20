@@ -41,7 +41,9 @@ const Card = ({
 
   return (
     <div
-      className={`Card group ${className != null && className}`}
+      className={`group relative m-2 h-72 w-44 cursor-pointer overflow-hidden rounded-lg shadow-xl dark:bg-neutral-950 dark:hover:bg-neutral-900 ${
+        className != null && className
+      }`}
       ref={cardRef}
     >
       <Image
