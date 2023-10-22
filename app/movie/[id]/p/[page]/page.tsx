@@ -46,7 +46,7 @@ export default async function page({
       <div className="absolute left-1/2 top-1/2 z-40 h-5/6 w-10/12 -translate-x-1/2 -translate-y-1/2">
         <Link
           href={`/movie/${params.id}`}
-          className="absolute z-50 m-1 rounded-full p-2 text-sm backdrop-blur-lg backdrop-sepia"
+          className="absolute z-50 m-1 rounded-full bg-neutral-700/30 p-2 text-sm backdrop-blur-lg"
         >
           <XMarkIcon className=" h-5 w-5 text-neutral-50" />
         </Link>

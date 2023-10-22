@@ -44,7 +44,7 @@ export default function Template({ children }: Props): React.JSX.Element {
           exit="exit"
           variants={animation.variants}
           transition={animation.transition}
-          className="relative z-40 flex h-screen w-screen flex-row overflow-hidden"
+          className="absolute left-0 top-0 z-40 flex h-screen w-screen flex-row overflow-hidden"
         >
           {children}
         </m.div>

@@ -21,7 +21,10 @@ const options = {
 };
 
 const fetchVideos = async (id: string): Promise<videos> => {
-  const data = await fetch(`${API_URL}movie/${id}/videos`, options);
+  const data = await fetch(
+    `${API_URL}movie/${id}/videos?language=en-US`,
+    options,
+  );
   const videos: videos = await data.json();
   return videos;
 };

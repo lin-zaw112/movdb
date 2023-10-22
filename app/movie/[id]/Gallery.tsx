@@ -36,7 +36,7 @@ export default async function Gallery({
   const images = await fetchImages(id);
   return (
     <div className=" w-3/6">
-      <Link href={`${id}/p${images.at(0)?.file_path ?? ""}`}>
+      <Link href={`/movie/${id}/p${images.at(0)?.file_path ?? ""}`}>
         <Image
           src={images.at(0)?.file_path ?? ""}
           className="h-3/5 w-full shadow-lg "
@@ -49,7 +49,7 @@ export default async function Gallery({
           .slice(1, 6)
           .map((image, i) => (
             <Link
-              href={`${id}/p${image.file_path ?? ""}`}
+              href={`/movie/${id}/p${image.file_path ?? ""}`}
               key={i}
               className="h-full w-full shadow-lg "
             >
