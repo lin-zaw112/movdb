@@ -38,9 +38,6 @@ module.exports = withPlugins(
         removeOriginalExtension: false,
         optimizeImages: true,
         optimizeImagesInDev: false,
-        mozjpeg: {
-          quality: 80,
-        },
         optipng: {
           optimizationLevel: 3,
         },
@@ -49,9 +46,7 @@ module.exports = withPlugins(
           interlaced: true,
           optimizationLevel: 3,
         },
-        svgo: {
-          // enable/disable svgo plugins here
-        },
+
         webp: {
           preset: "default",
           quality: 75,
