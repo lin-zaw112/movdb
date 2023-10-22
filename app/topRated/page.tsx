@@ -8,16 +8,16 @@ const initialData: React.JSX.Element[] = [];
 for (let i = 0; i <= 20; i++) {
   initialData.push(<CardSkelaton key={i} />);
 }
-let initial = true;
 export default function TopRated(): React.JSX.Element {
   const [content, setContent] = useState<React.JSX.Element>();
   const [status, setStatus] = useState<"success" | "failed" | "init">("init");
   const [movies, setMovies] = useState<moviesObj>();
   const [Currentpage, setPage] = useState<number>(1);
+  const [error, setError] = useState<string | null>(null);
 
   const newLimit = useCallback((): void => {
     setPage((prev) =>
-      movies?.page != null
+      movies?.page !== undefined
         ? prev === movies.page
           ? prev + 1
           : prev
@@ -27,34 +27,33 @@ export default function TopRated(): React.JSX.Element {
 
   const fetchVideos = useCallback(async (page: number): Promise<void> => {
     const res = await fetch(`/api/movies/topRated?page=${page}`);
+    if (!res.ok) setError(res.statusText);
 
-    const moviesObj: moviesObj = await res.json();
-
+    const data: moviesObj = await res.json();
     setMovies(function (prev) {
       if (prev === undefined) {
         setStatus("success");
-        return { ...moviesObj };
+        return { ...data };
       } else {
         setStatus("success");
         return {
-          ...moviesObj,
+          ...data,
           results:
-            prev.results[0].id === moviesObj.results[0].id
+            prev.results[0].id === data.results[0].id
               ? [...prev.results]
-              : [...prev.results, ...moviesObj.results],
+              : [...prev.results, ...data.results],
         };
       }
     });
   }, []);
 
   useEffect(() => {
-    if (initial) {
-      initial = false;
-      return;
-    }
+    if (error !== null) throw new Error(error);
+  }, [error]);
+
+  useEffect(() => {
     void fetchVideos(Currentpage);
   }, [Currentpage, fetchVideos]);
-
   useEffect(() => {
     if (status === "init") setContent(<Fragment>{initialData}</Fragment>);
     if (status === "success") {
@@ -87,7 +86,7 @@ export default function TopRated(): React.JSX.Element {
         setContent(<Fragment>{items}</Fragment>);
       }
     }
-  }, [movies, status, newLimit]);
+  }, [movies, newLimit, status]);
   return (
     <div className={`m-4 flex flex-wrap justify-around gap-2`}>{content}</div>
   );

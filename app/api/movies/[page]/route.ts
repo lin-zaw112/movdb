@@ -2,7 +2,6 @@ import "server-only";
 import { NextResponse, type NextRequest } from "next/server";
 
 import getEnvVar from "@/utils/getEnvVer";
-
 const API_URL = getEnvVar("NEXT_PUBLIC_API_URL")?.replace(
   "{API_VERSION}",
   `${getEnvVar("NEXT_PUBLIC_API_VERSION")}`,
@@ -49,13 +48,12 @@ async function NowPlaying(): Promise<NextResponse<moviesObj>> {
 
   return NextResponse.json(movies);
 }
-interface error {
-  status: string;
+interface errorObj extends Error {
   message: string;
 }
 export async function GET(
   req: NextRequest,
-): Promise<NextResponse<moviesObj | error>> {
+): Promise<NextResponse<moviesObj | errorObj>> {
   const page = req.nextUrl.searchParams.get("page") ?? "1";
 
   try {
@@ -66,11 +64,13 @@ export async function GET(
     if (req.nextUrl.pathname === "/api/movies/topRated")
       return await getTopRatedMovies(page);
     return await NowPlaying();
-  } catch (error) {
-    console.log(error);
-    return NextResponse.json({
-      status: "fail",
-      message: "Not found",
-    });
+  } catch (error: any) {
+    const err: errorObj = { ...error };
+    if (error.cause.code === "ENOTFOUND")
+      err.message =
+        "Can't connect to Movies DataBase. Please Check you internet Connection.";
+    console.error(err);
+
+    return NextResponse.json(err, { status: 404, statusText: err.message });
   }
 }

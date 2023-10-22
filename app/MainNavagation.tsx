@@ -27,7 +27,7 @@ const MainNavagation = (): ReactElement => {
     setLoading(false);
   }, [path]);
   return (
-    <div className="fixed left-0 top-0 z-50 mx-auto flex h-16 w-screen items-center justify-between bg-white px-20 font-medium uppercase ring-1 ring-inset ring-neutral-100 dark:bg-neutral-950">
+    <div className="fixed left-0 top-0 z-20 mx-auto flex h-16 w-screen items-center justify-between bg-white px-20 font-medium uppercase ring-1 ring-inset ring-neutral-100 dark:bg-neutral-950">
       {!isIndex && (
         <button className="absolute" onClick={backHandler}>
           <ArrowLongLeftIcon className="h-6 w-6" />

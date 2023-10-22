@@ -8,7 +8,6 @@ const initialData: React.JSX.Element[] = [];
 for (let i = 0; i <= 20; i++) {
   initialData.push(<CardSkelaton key={i} />);
 }
-let initial = true;
 export default function Popular(): React.JSX.Element {
   const [content, setContent] = useState<React.JSX.Element>();
   const [status, setStatus] = useState<"success" | "failed" | "init">("init");
@@ -17,7 +16,7 @@ export default function Popular(): React.JSX.Element {
 
   const newLimit = useCallback((): void => {
     setPage((prev) =>
-      movies?.page != null
+      movies?.page !== undefined
         ? prev === movies.page
           ? prev + 1
           : prev
@@ -48,10 +47,6 @@ export default function Popular(): React.JSX.Element {
   }, []);
 
   useEffect(() => {
-    if (initial) {
-      initial = false;
-      return;
-    }
     void fetchVideos(Currentpage);
   }, [Currentpage, fetchVideos]);
 
