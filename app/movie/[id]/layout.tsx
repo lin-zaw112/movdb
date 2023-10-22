@@ -42,7 +42,6 @@ async function layout({
       {movie !== undefined && (
         <div className=" flex p-6 pb-0">
           <Image
-            alt={movie.title}
             src={
               movie.poster_path ??
               movie.belongs_to_collection?.poster_path ??

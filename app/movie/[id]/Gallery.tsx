@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/alt-text */
 import Image from "@/Components/utils/Image";
 import React from "react";
 import getEnvVar from "@/utils/getEnvVer";
@@ -14,6 +13,7 @@ const options = {
     accept: "application/json",
     Authorization: `Bearer ${getEnvVar("API_ACCESS_KEY")}`,
   },
+  next: { revalidate: 3600 },
 };
 
 async function fetchImages(id: number): Promise<imageObj["backdrops"]> {

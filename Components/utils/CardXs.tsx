@@ -19,7 +19,6 @@ export default function CardXs({
             className="h-full w-full group-hover:opacity-40 group-hover:duration-500"
             src={image}
             quality="original"
-            alt={name}
           />
         </div>
         <div className="absolute bottom-0 left-0 z-10 h-20 w-full p-2 text-lg leading-relaxed">
