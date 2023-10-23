@@ -3,7 +3,6 @@
 // next.config.js
 const withPlugins = require("next-compose-plugins");
 const optimizedImages = require("next-optimized-images");
-
 const config = {
   reactStrictMode: true,
   images: {
@@ -37,7 +36,7 @@ module.exports = withPlugins(
         handleImages: ["jpeg", "png", "svg", "webp", "gif"],
         removeOriginalExtension: false,
         optimizeImages: true,
-        optimizeImagesInDev: false,
+        optimizeImagesInDev: true,
         optipng: {
           optimizationLevel: 3,
         },
@@ -46,7 +45,9 @@ module.exports = withPlugins(
           interlaced: true,
           optimizationLevel: 3,
         },
-
+        responsive: {
+          adapter: require("responsive-loader/sharp"),
+        },
         webp: {
           preset: "default",
           quality: 75,

@@ -8,21 +8,18 @@ interface Props {
 }
 
 const animation = {
-  name: "Slide Up",
+  name: "Fade Back",
   variants: {
     initial: {
       opacity: 0,
-      top: "100vh",
       scale: 0.4,
     },
     animate: {
       opacity: 1,
-      top: "0vh",
       scale: 1,
     },
     exit: {
       opacity: 0,
-      top: "100vh",
       scale: 0.4,
     },
   },
@@ -44,7 +41,7 @@ export default function Template({ children }: Props): React.JSX.Element {
           exit="exit"
           variants={animation.variants}
           transition={animation.transition}
-          className="absolute left-0 top-0 z-40 flex h-screen w-screen flex-row overflow-hidden"
+          className="relative left-0 top-0 z-40 flex h-screen w-screen flex-row overflow-hidden"
         >
           {children}
         </m.div>

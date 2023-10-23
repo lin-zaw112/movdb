@@ -3,26 +3,13 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
 import React, { Fragment } from "react";
+import OriginalPhoto from "./OriginalPhoto";
 
 interface Props {
   params: { id: string; page: string };
 }
-async function generateImageAlt(url: string): Promise<string> {
-  try {
-    const res = await fetch(
-      `https://alt-text-generator.vercel.app/api/generate?imageUrl=${url}`,
-    );
-    const text = await res.json();
-    return text;
-  } catch (error) {
-    return "Just a Photo";
-  }
-}
-export default async function page({
-  params,
-}: Props): Promise<React.JSX.Element> {
-  const alt = await generateImageAlt(getImageUrl("w780", `/${params.page}`));
 
+export default function page({ params }: Props): React.JSX.Element {
   return (
     <Fragment>
       <Link
@@ -31,11 +18,9 @@ export default async function page({
       >
         <div className={`relative h-full w-full blur-sm`}>
           <Image
-            src={getImageUrl("w300", `/${params.page}`)}
+            src={getImageUrl("w300", `/${params.page}?lqip`)}
             alt="backdrop"
             fill
-            placeholder="blur"
-            blurDataURL={getImageUrl("w300", `/${params.page}`)}
             sizes="300px"
             quality={30}
             priority
@@ -50,19 +35,7 @@ export default async function page({
         >
           <XMarkIcon className=" h-5 w-5 text-neutral-50" />
         </Link>
-        <div className={`relative h-full w-full`}>
-          <Image
-            src={getImageUrl("original", `/${params.page}`)}
-            alt={alt}
-            fill
-            sizes="100vw"
-            placeholder="blur"
-            blurDataURL={getImageUrl("w300", `/${params.page}`)}
-            quality={100}
-            priority
-            className="object-cover object-center "
-          />
-        </div>
+        <OriginalPhoto image={params.page} />
       </div>
     </Fragment>
   );

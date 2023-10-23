@@ -44,12 +44,24 @@
     "image-trace-loader": "^1.0.2",
     "imagemin-gifsicle": "^7.0.0",
     "imagemin-optipng": "^8.0.0",
+    "imagemin-svgo": "^10.0.1",
     "jimp": "^0.22.10",
     "lqip-loader": "^2.2.1",
     "prettier": "^3.0.3",
+    "responsive-loader": "^3.1.2",
     "sharp": "^0.32.6",
     "svg-sprite-loader": "^6.0.11",
     "typescript": "^5.2.2",
     "webp-loader": "^0.6.0"
+  },
+  "pnpm": {
+    "peerDependencyRules": {
+      "allowedVersions": {
+        "webpack": "5"
+      }
+    },
+    "patchedDependencies": {
+      "imagemin-svgo@10.0.1": "patches/imagemin-svgo@10.0.1.patch"
+    }
   }
 }
