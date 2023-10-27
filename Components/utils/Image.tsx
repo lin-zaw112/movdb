@@ -12,7 +12,7 @@ export default function GET({
   src: string;
   quality: "original" | "w300" | "w780" | "w1280";
   alt: string;
-}): Promise<React.JSX.Element> {
+}): React.JSX.Element {
   return (
     <div className={`relative overflow-hidden rounded-lg ${className}`}>
       <Image
