@@ -49,6 +49,7 @@ async function layout({
               movie.belongs_to_collection?.backdrop_path ??
               ""
             }
+            alt={movie.title}
             quality="original"
             className={`before:badge relative m-5 h-80 w-52 flex-none overflow-hidden hover:before:hidden ${
               BadgeVariants[movie.status]

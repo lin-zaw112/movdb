@@ -1,28 +1,18 @@
 import React from "react";
 import Image from "next/image";
 import getImageUrl from "@/utils/getImageUrl";
-async function generateImageAlt(url: string): Promise<string> {
-  try {
-    const res = await fetch(
-      `https://alt-text-generator.vercel.app/api/generate?imageUrl=${url}`,
-      { headers: { "Access-Control-Allow-Origin": "*" } },
-    );
-    const text = await res.json();
-    return text;
-  } catch (error) {
-    return "Just a Photo";
-  }
-}
-export default async function GET({
+
+export default function GET({
   className,
   src,
   quality,
+  alt,
 }: {
   className: string;
   src: string;
   quality: "original" | "w300" | "w780" | "w1280";
+  alt: string;
 }): Promise<React.JSX.Element> {
-  const alt = await generateImageAlt(getImageUrl(quality, src));
   return (
     <div className={`relative overflow-hidden rounded-lg ${className}`}>
       <Image
