@@ -5,6 +5,7 @@ async function generateImageAlt(url: string): Promise<string> {
   try {
     const res = await fetch(
       `https://alt-text-generator.vercel.app/api/generate?imageUrl=${url}`,
+      { headers: { "Access-Control-Allow-Origin": "*" } },
     );
     const text = await res.json();
     return text;

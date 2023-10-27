@@ -25,7 +25,8 @@ const Card = ({
 }: Props): ReactElement => {
   const cardRef = useRef<null | HTMLDivElement>(null);
   const [loading, setLoading] = useState(false);
-  const [imgLoaded, setImgLoaded] = useState(false);
+  const [imgLoaded, setImgLoading] = useState(false);
+
   useEffect(() => {
     if (cardRef.current === null) return;
     const observer = new IntersectionObserver(([entry]) => {
@@ -60,7 +61,7 @@ const Card = ({
           25vw"
         loading="eager"
         onLoadingComplete={() => {
-          setImgLoaded(true);
+          setImgLoading(true);
         }}
       />
       <Link

@@ -22,7 +22,7 @@ export default async function OriginalPhoto({
   const alt = await generateImageAlt(getImageUrl("w780", `/${image}`));
 
   return (
-    <div className={`relative h-full w-full`}>
+    <div className={`relative h-full w-full `}>
       <Image
         src={getImageUrl("original", `/${image}?original?trace`)}
         alt={alt}
