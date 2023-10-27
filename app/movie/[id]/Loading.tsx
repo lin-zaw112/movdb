@@ -3,7 +3,7 @@ import React from "react";
 
 const Loading = (): React.JSX.Element => {
   return (
-    <div className=" grid h-full w-screen place-items-center">
+    <div className=" grid h-full w-full place-items-center">
       <h1 className=" flex flex-row items-center">
         <Cog6ToothIcon className="inline-block h-8 w-8 animate-spin" />
         <div className=" loader" />

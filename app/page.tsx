@@ -4,6 +4,7 @@ import Loading from "@/app/Loading";
 import Slider from "@/app/Slider";
 import Link from "next/link";
 import getEnvVar from "@/utils/getEnvVer";
+import Search from "@/Components/Search/Search";
 
 const API_URL = getEnvVar("NEXT_PUBLIC_API_URL")?.replace(
   "{API_VERSION}",
@@ -32,18 +33,7 @@ export default async function Index(): Promise<ReactElement> {
   const movies = await fetchTrendingMoviesToday();
   return (
     <main className="flex min-h-full w-screen flex-col px-20">
-      <div className=" relative m-10 w-2/4 self-center">
-        <input
-          type="text"
-          name="search"
-          id="search"
-          placeholder="Search for Movies ...."
-          className="absolute left-0 top-0 h-8 w-full rounded-full p-6 ring-1 dark:bg-neutral-800 dark:ring-0 dark:placeholder:text-neutral-400"
-        />
-        <button className="absolute right-0 top-0 z-10 rounded-full bg-neutral-950 px-6 py-3 text-center text-neutral-50 transition hover:bg-neutral-800 dark:bg-neutral-50 dark:text-neutral-950 hover:dark:bg-neutral-950 hover:dark:text-neutral-50">
-          search
-        </button>
-      </div>
+      <Search />
       <div className="mx-auto my-12 flex h-full w-full justify-center space-x-3.5">
         <div className="h-full rounded-3xl bg-gradient-to-r from-slate-300 to-slate-500 shadow-lg ">
           <Link href="/topRated">
