@@ -1,11 +1,14 @@
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
+import Portal from "../utils/Potal";
+import Loading from "@/app/LoadingOverlay";
 
 interface Props {
   results: moviesObj["results"];
 }
 
 export default function Results({ results }: Props): React.JSX.Element {
+  const [isLoading, setLoading] = useState(false);
   return (
     <div className="absolute top-14 z-10 h-96 w-full overflow-hidden">
       <div className="flex h-4/6 flex-col overflow-scroll backdrop-blur-xl dark:bg-neutral-950/50">
@@ -14,6 +17,9 @@ export default function Results({ results }: Props): React.JSX.Element {
             <Link
               href={`/movie/${movie.id}`}
               className="flex flex-row justify-between p-8 px-20 shadow-sm hover:bg-neutral-950/60"
+              onClick={() => {
+                setLoading(true);
+              }}
             >
               <h1 className="text-ellipsis text-lg font-semibold">
                 {movie.title}
@@ -27,6 +33,7 @@ export default function Results({ results }: Props): React.JSX.Element {
           </div>
         ))}
       </div>
+      <Portal>{isLoading && <Loading />}</Portal>
     </div>
   );
 }
