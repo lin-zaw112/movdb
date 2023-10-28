@@ -51,6 +51,7 @@ export default function YouTubeFrame({
         alt="YouTube Video Thumbnail"
         fill
         className="object-cover"
+        unoptimized
       />
     </div>
   );

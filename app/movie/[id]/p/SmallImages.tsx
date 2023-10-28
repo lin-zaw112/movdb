@@ -49,6 +49,7 @@ export default function SmallImages({
         (max-width: 1280px) 50vw,
         (max-width: 1536px) 33vw,
         25vw"
+                  unoptimized
                   className="object-cover object-top text-center"
                 />
               </div>

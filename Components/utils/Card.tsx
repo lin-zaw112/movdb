@@ -54,6 +54,7 @@ const Card = ({
         blurDataURL={blur}
         className="h-full w-full transition group-hover:scale-110"
         fill
+        unoptimized
         style={{ transform: "translate3d(0, 0, 0)" }}
         sizes="(max-width: 640px) 100vw,
           (max-width: 1280px) 50vw,

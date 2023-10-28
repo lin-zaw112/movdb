@@ -24,6 +24,7 @@ export default function GET({
         (max-width: 1536px) 33vw,
         25vw"
         className="object-cover object-top text-center"
+        unoptimized
       />
     </div>
   );

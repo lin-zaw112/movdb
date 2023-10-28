@@ -24,6 +24,7 @@ export default function page({ params }: Props): React.JSX.Element {
             sizes="300px"
             quality={30}
             priority
+            unoptimized
             className="object-cover object-center"
           />
         </div>

@@ -32,6 +32,7 @@ export default async function OriginalPhoto({
         priority
         blurDataURL={getImageUrl("w300", `/${image}?lqip?inline?trace`)}
         quality={100}
+        unoptimized
         className="object-cover object-center"
       />
     </div>
